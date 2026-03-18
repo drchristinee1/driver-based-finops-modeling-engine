@@ -1,0 +1,60 @@
+{
+    "service": "ecommerce_checkout_api",
+    "driver_usage": {
+        "compute_hours": 120,
+        "database_hours": 120,
+        "storage_gb": 250
+    },
+    "rates_used": {
+        "compute_rate_per_hour": 0.0416,
+        "database_rate_per_hour": 0.067,
+        "storage_rate_per_gb": 0.023
+    },
+    "cost_breakdown": {
+        "compute_cost": 4.99,
+        "database_cost": 8.04,
+        "storage_cost": 5.75,
+        "total_cost": 18.78
+    },
+    "cost_distribution": {
+        "compute_percent": 26.58,
+        "database_percent": 42.81,
+        "storage_percent": 30.61
+    },
+    "business_metrics": {
+        "transactions": 18000,
+        "orders_completed": 17250,
+        "active_users": 4200
+    },
+    "unit_economics": {
+        "cost_per_transaction": 0.001,
+        "cost_per_order": 0.0011,
+        "cost_per_user": 0.0045
+    },
+    "scenario_analysis": {
+        "scenario_name": "20_percent_growth",
+        "growth_assumptions": {
+            "transaction_growth_percent": 20,
+            "compute_growth_percent": 20,
+            "database_growth_percent": 20,
+            "storage_growth_percent": 10
+        },
+        "projected_driver_usage": {
+            "projected_compute_hours": 144.0,
+            "projected_database_hours": 144.0,
+            "projected_storage_gb": 275.0
+        },
+        "projected_cost_breakdown": {
+            "projected_compute_cost": 5.99,
+            "projected_database_cost": 9.65,
+            "projected_storage_cost": 6.33,
+            "projected_total_cost": 21.96
+        },
+        "projected_business_metrics": {
+            "projected_transactions": 21600.0
+        },
+        "projected_unit_economics": {
+            "projected_cost_per_transaction": 0.001
+        }
+    }
+}

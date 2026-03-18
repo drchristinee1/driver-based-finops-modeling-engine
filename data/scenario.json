@@ -1,0 +1,7 @@
+{
+  "scenario_name": "20_percent_growth",
+  "transaction_growth_percent": 20,
+  "compute_growth_percent": 20,
+  "database_growth_percent": 20,
+  "storage_growth_percent": 10
+}

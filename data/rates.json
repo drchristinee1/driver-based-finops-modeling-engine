@@ -1,0 +1,13 @@
+{
+  "rates": {
+    "compute": {
+      "ec2_per_hour": 0.0416
+    },
+    "database": {
+      "rds_per_hour": 0.067
+    },
+    "storage": {
+      "s3_per_gb": 0.023
+    }
+  }
+}

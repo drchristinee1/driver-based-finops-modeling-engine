@@ -1,0 +1,19 @@
+{
+  "service": "ecommerce_checkout_api",
+  "drivers": {
+    "compute": {
+      "resource_type": "ec2",
+      "instance_hours": 120,
+      "instance_type": "t3.medium"
+    },
+    "database": {
+      "resource_type": "rds",
+      "db_hours": 120,
+      "db_instance_type": "db.t3.medium"
+    },
+    "storage": {
+      "resource_type": "s3",
+      "storage_gb": 250
+    }
+  }
+}
