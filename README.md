@@ -1,18 +1,17 @@
 # Driver-Based FinOps Modeling Engine™
 
-**Translating infrastructure consumption into unit economics—and simulating how cloud cost behaves under demand growth.**
+Translating infrastructure consumption into unit economics—and simulating how cloud cost behaves under demand growth.
 
----
 
 ## 🚀 Overview
 
-The Driver-Based FinOps Modeling Engine™ is a Python-based economic modeling system that connects cloud infrastructure usage to business outcomes.
+The **Driver-Based FinOps Modeling Engine™** is a Python-based economic modeling system that connects cloud infrastructure usage directly to business outcomes.
 
 It enables teams to move beyond cost visibility into:
 
-- Cost-to-serve analysis  
-- Unit economics  
-- Scenario-based cost simulation  
+* Cost-to-serve analysis
+* Unit economics modeling
+* Scenario-based cost simulation
 
 Instead of asking:
 
@@ -20,62 +19,118 @@ Instead of asking:
 
 This engine answers:
 
-> “What is driving our spend, what does it cost per transaction, and how will cost behave as we scale?”
-
-## What it does
-
-This project:
-- models cloud infrastructure drivers for an e-commerce checkout API
-- calculates infrastructure cost
-- translates cloud spend into cost per transaction, cost per order, and cost per user
-
-## Files
-
-- `data/drivers.json` → infrastructure usage drivers
-- `data/rates.json` → cloud unit rates
-- `data/business_metrics.json` → business output metrics
-- `main.py` → cost and unit economics calculator
-- `output/unit_economics_report.json` → generated report
-
-## Run
-
-```bash
-python3 main.py
-## ▶️ How to Run
-
-1. Ensure Python is installed
-
-2. Run the model:
-
-```bash
-python3 main.py
-Output will be generated:
-output/unit_economics_report.json
-
+* What is driving our cost?
+* How does cost scale with demand?
+* What is our cost per customer, transaction, or workload?
+* How will our cloud spend behave under growth, optimization, or architectural change?
 
 ---
 
-### 📊 Sample Output
+## ⚙️ System Summary (At a Glance)
 
-```md
-## 📊 Sample Output Highlights
+A scenario-based unit economics engine that translates cloud usage drivers into cost and business impact.
 
-Example output from the engine:
+### Core Capabilities
 
-- Total cost: `18.78`
-- Cost per transaction: `0.001`
-- Projected total cost: `21.96`
-- Projected cost per transaction: `0.001`
+* Driver-based cost modeling (compute, database, storage)
+* Scenario simulation (growth, optimization, scaling)
+* Unit economics calculation (cost per transaction, user, workload)
 
-This demonstrates how infrastructure consumption translates into unit economics and how cost behaves under demand growth.
-## 🗂️ Project Structure
-.
-├── main.py
-├── data/
-│   ├── drivers.json
-│   ├── rates.json
-│   ├── business_metrics.json
-│   └── scenario.json
-├── output/
-│   └── unit_economics_report.json
-└── README.md
+### Inputs
+
+* `drivers.json`
+* `rates.json`
+* `business_metrics.json`
+* `scenario.json`
+
+### Output
+
+* `unit_economics_report.json`
+
+### Purpose
+
+This engine represents the **economics layer of a FinOps operating system**, enabling cost-to-value analysis and forecasting.
+
+---
+
+## 🧠 Why This Matters
+
+Most FinOps practices stop at reporting and anomaly detection.
+
+This engine represents the **economics layer of FinOps**—where infrastructure consumption is translated into:
+
+* Financial insight
+* Forecasting capability
+* Decision support for engineering and finance
+
+It allows teams to model trade-offs before they happen, not just explain them after.
+
+---
+
+## 🔗 Position in FinOps Operating System
+
+This project represents the **Economics Layer** in a FinOps Operating System:
+
+* **Detection Layer** → identifies anomalies and cost signals *(see `reveal-finops-lab`)*
+* **Action Layer** → routes insights to owners
+* **Economics Layer (this repo)** → models cost behavior and business impact
+* **Strategy Layer** → aligns cost with growth, margin, and investment decisions
+
+---
+
+## 🧩 How It Works (Architecture Flow)
+
+```
+        +----------------------+
+        |   Business Metrics   |
+        | (users, traffic,     |
+        |  transactions)       |
+        +----------+-----------+
+                   |
+                   v
+        +----------------------+
+        |   Usage Drivers      |
+        | (EC2 hours, RDS, S3) |
+        +----------+-----------+
+                   |
+                   v
+        +----------------------+
+        |      Rate Card       |
+        | ($ per hour / GB)    |
+        +----------+-----------+
+                   |
+                   v
+        +----------------------+
+        |   Scenario Engine    |
+        | (growth, optimize,   |
+        |  scale assumptions)  |
+        +----------+-----------+
+                   |
+                   v
+        +------------------------------+
+        | Unit Economics Output        |
+        | - Total Cost                |
+        | - Cost per User            |
+        | - Cost per Transaction     |
+        | - Scenario Comparisons     |
+        +------------------------------+
+```
+
+---
+
+## 🔁 Flow Explanation
+
+1. **Business Metrics** define demand (users, transactions, workload growth)
+2. **Usage Drivers** translate demand into infrastructure consumption
+3. **Rate Card** applies pricing to each driver
+4. **Scenario Engine** simulates different conditions (growth, optimization, scaling)
+5. **Output Layer** produces unit economics and cost insights
+
+---
+
+## 🎯 What This Enables
+
+* Forecast how cost behaves before scaling
+* Evaluate cost impact of architecture decisions
+* Understand cost per unit of business value
+* Model trade-offs between growth and efficiency
