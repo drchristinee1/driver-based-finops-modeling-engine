@@ -163,7 +163,7 @@ This project represents the **Economics Layer** in a FinOps Operating System:
 
 This engine works alongside:
 
-👉 https://github.com/YOUR-USERNAME/reveal-finops-lab
+👉 https://github.com/drchristinee1/reveal-finops-lab
 
 The Detection Layer identifies:
 
