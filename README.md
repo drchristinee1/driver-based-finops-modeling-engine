@@ -180,3 +180,19 @@ These signals can then be modeled in this engine to understand:
 Together, they form a closed-loop FinOps system:
 
 Detection → Action → Economics → Decision
+---
+
+## 🧠 FinOps Operating System View
+
+| Repo                                | Role                    |
+| ----------------------------------- | ----------------------- |
+| reveal-finops-lab                   | Detection layer         |
+| driver-based-finops-modeling-engine | Economics layer         |
+| Combined System                     | FinOps Operating System |
+
+This repository is part of a larger system that connects:
+
+Detection → Action → Economics → Strategy
+
+Together, these components form a closed-loop FinOps model that moves from insight to decision.
+
