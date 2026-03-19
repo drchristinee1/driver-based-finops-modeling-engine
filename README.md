@@ -2,8 +2,9 @@
 
 Translating infrastructure consumption into unit economics—and simulating how cloud cost behaves under demand growth.
 
+---
 
-## Overview
+## 🚀 Overview
 
 The **Driver-Based FinOps Modeling Engine™** is a Python-based economic modeling system that connects cloud infrastructure usage directly to business outcomes.
 
@@ -50,6 +51,27 @@ A scenario-based unit economics engine that translates cloud usage drivers into 
 ### Purpose
 
 This engine represents the **economics layer of a FinOps operating system**, enabling cost-to-value analysis and forecasting.
+
+---
+
+## 🔁 Scenario-Based Modeling
+
+This engine is designed to simulate how cloud cost behaves under different conditions.
+
+Each scenario represents a different set of assumptions, such as:
+
+* Baseline usage
+* Traffic growth (e.g., +20% users)
+* Optimization (rightsizing, efficiency improvements)
+* Architectural changes
+
+For each scenario, the engine:
+
+1. Recalculates infrastructure usage
+2. Applies pricing (rate card)
+3. Produces total cost and unit economics
+
+This allows teams to compare outcomes and understand how cost evolves under different business and engineering decisions.
 
 ---
 
@@ -134,3 +156,27 @@ This project represents the **Economics Layer** in a FinOps Operating System:
 * Evaluate cost impact of architecture decisions
 * Understand cost per unit of business value
 * Model trade-offs between growth and efficiency
+
+---
+
+## 🔗 Related Project: Detection Layer
+
+This engine works alongside:
+
+👉 https://github.com/YOUR-USERNAME/reveal-finops-lab
+
+The Detection Layer identifies:
+
+* Cost anomalies
+* Idle resources
+* Rightsizing opportunities
+
+These signals can then be modeled in this engine to understand:
+
+* Cost impact
+* Unit economics
+* Forecasted behavior
+
+Together, they form a closed-loop FinOps system:
+
+Detection → Action → Economics → Decision
