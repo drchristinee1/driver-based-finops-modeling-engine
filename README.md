@@ -3,7 +3,7 @@
 Translating infrastructure consumption into unit economics—and simulating how cloud cost behaves under demand growth.
 
 
-## 🚀 Overview
+## Overview
 
 The **Driver-Based FinOps Modeling Engine™** is a Python-based economic modeling system that connects cloud infrastructure usage directly to business outcomes.
 
