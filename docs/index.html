@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driver-Based FinOps Modeling Engine</title>
+  <meta
+    name="description"
+    content="Translate infrastructure consumption into cost behavior, unit economics, and scenario-based business insight."
+  />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #111831;
+      --card: #18213f;
+      --card-2: #1f2a4d;
+      --text: #f4f7fb;
+      --muted: #b7c2d8;
+      --line: #2b3760;
+      --accent: #7cc7ff;
+      --accent-2: #9dffcf;
+      --max-width: 1150px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #0f1730 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 16, 32, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 88px 0 64px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(124, 199, 255, 0.12);
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .lead {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 28px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.97;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #08101f;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .hero-points {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .hero-point {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+    }
+
+    .hero-point span {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(31, 42, 77, 0.9), rgba(24, 33, 63, 0.95));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      font-size: 1.1rem;
+    }
+
+    .mini-flow {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-step {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
+    .mini-arrow {
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 34px 0 22px;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      max-width: 800px;
+      margin-bottom: 26px;
+    }
+
+    .grid-3,
+    .grid-4,
+    .grid-2 {
+      display: grid;
+      gap: 20px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3,
+    .card h4 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .list {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .list li + li {
+      margin-top: 8px;
+    }
+
+    .diagram {
+      background: linear-gradient(180deg, rgba(24, 33, 63, 0.95), rgba(17, 24, 49, 0.95));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      align-items: center;
+    }
+
+    .flow-box {
+      background: var(--card-2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 14px;
+      text-align: center;
+      min-height: 132px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .flow-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .flow-box small {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .callout {
+      margin-top: 18px;
+      padding: 18px 20px;
+      background: rgba(157, 255, 207, 0.08);
+      border: 1px solid rgba(157, 255, 207, 0.18);
+      border-radius: 16px;
+      color: #ddf8eb;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .metric {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric .value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      margin: 34px 0 80px;
+      background: linear-gradient(135deg, rgba(124, 199, 255, 0.15), rgba(157, 255, 207, 0.1));
+      border: 1px solid rgba(124, 199, 255, 0.18);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 22px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 22px 0 34px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .grid-4,
+      .grid-3,
+      .grid-2,
+      .metrics,
+      .flow-row {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+
+      .cta h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Driver-Based FinOps Modeling Engine</div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#inputs">Inputs</a>
+        <a href="#outputs">Outputs</a>
+        <a href="#use-cases">Use Cases</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">FinOps Modeling • Unit Economics • Scenario Analysis</div>
+        <h1>Translate infrastructure consumption into cost behavior and business-aligned insight.</h1>
+        <p class="lead">
+          This prototype demonstrates how infrastructure usage can be translated into cost behavior,
+          unit economics, and scenario-based financial insight for better engineering, finance,
+          and leadership decision-making.
+        </p>
+
+        <div class="button-row">
+          <a href="https://github.com/" target="_blank" class="btn btn-primary">View Repository</a>
+          <a href="https://calendly.com/finopswithdrchristine/30min" target="_blank" class="btn btn-secondary">Book Session</a>
+        </div>
+
+        <div class="hero-points">
+          <div class="hero-point"><span>•</span> Connect infrastructure drivers to pricing logic and modeled cost.</div>
+          <div class="hero-point"><span>•</span> Translate cloud activity into unit economics like cost per order or cost per transaction.</div>
+          <div class="hero-point"><span>•</span> Simulate demand scenarios to support forecasting and architectural trade-off decisions.</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Model Flow</h3>
+        <div class="mini-flow">
+          <div class="mini-step"><strong>1. Infrastructure Drivers</strong><br />EC2 hours, RDS hours, S3 GB, requests, storage</div>
+          <div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>2. Pricing Layer</strong><br />Unit rates and assumptions by service or driver</div>
+          <div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>3. Cost Engine</strong><br />Modeled total cost and cost by driver</div>
+          <div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>4. Business Translation</strong><br />Cost per user, order, workload, or transaction</div>
+          <div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>5. Scenario Analysis</strong><br />Growth sensitivity and future cost behavior</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="container">
+        <h2 class="section-title">Overview</h2>
+        <p class="section-copy">
+          Most cloud cost analysis stops at reporting. This engine goes a step further by connecting
+          infrastructure drivers to pricing, total cost, and business metrics so organizations can
+          understand not only what they spent, but how cost behaves as demand changes.
+        </p>
+
+        <div class="metrics">
+          <div class="metric">
+            <div class="value">Drivers</div>
+            <div class="label">Infrastructure consumption inputs such as compute, database, storage, and requests</div>
+          </div>
+          <div class="metric">
+            <div class="value">Rates</div>
+            <div class="label">Pricing assumptions used to translate usage into modeled cost</div>
+          </div>
+          <div class="metric">
+            <div class="value">Unit Economics</div>
+            <div class="label">Business-aligned outputs such as cost per order, cost per user, or cost per transaction</div>
+          </div>
+          <div class="metric">
+            <div class="value">Scenarios</div>
+            <div class="label">Demand growth simulations to support forecasting and decision-making</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why-it-matters">
+      <div class="container">
+        <h2 class="section-title">Why It Matters</h2>
+        <p class="section-copy">
+          FinOps becomes more strategic when cost is translated into operational and business terms.
+          Instead of reacting after spend lands, teams can evaluate how architecture, demand growth,
+          and usage behavior influence cost-to-serve.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Move beyond reporting</h3>
+            <p>
+              Shift from descriptive cost visibility to modeled insight that explains what is driving cost
+              and how it may change under growth or workload variation.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Support trade-off decisions</h3>
+            <p>
+              Help engineering and leadership compare performance, scale, and cost impacts before spend
+              becomes a problem.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Make business metrics visible</h3>
+            <p>
+              Translate infrastructure cost into unit economics that support forecasting, accountability,
+              and margin conversations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <div class="container">
+        <h2 class="section-title">How the Model Works</h2>
+        <p class="section-copy">
+          The model follows a simple logic chain from technical usage signals to business-facing cost insight.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>1. Capture usage drivers</h3>
+            <p>
+              Baseline consumption is collected for infrastructure elements such as compute hours,
+              database hours, object storage, or API/request volume.
+            </p>
+          </div>
+          <div class="card">
+            <h3>2. Apply pricing assumptions</h3>
+            <p>
+              Rates are assigned to each driver to translate raw infrastructure usage into cost,
+              whether from public cloud pricing, internal rates, or modeled assumptions.
+            </p>
+          </div>
+          <div class="card">
+            <h3>3. Translate into business insight</h3>
+            <p>
+              Total cost is connected to business metrics like customers, transactions, or orders
+              to produce usable unit economics and scenario-based decision support.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Core outcome:</strong> This engine helps connect engineering activity to financial impact,
+          making cost behavior easier to explain, forecast, and manage.
+        </div>
+      </div>
+    </section>
+
+    <section id="inputs">
+      <div class="container">
+        <h2 class="section-title">Inputs</h2>
+        <p class="section-copy">
+          The model is driven by simple structured inputs so it can be adapted to different environments and use cases.
+        </p>
+
+        <div class="grid-4">
+          <div class="card">
+            <h4>drivers.csv</h4>
+            <p>Baseline infrastructure consumption by service, workload, or usage driver.</p>
+          </div>
+          <div class="card">
+            <h4>rates.csv</h4>
+            <p>Unit rate assumptions that map each driver to its pricing logic.</p>
+          </div>
+          <div class="card">
+            <h4>business_metrics.csv</h4>
+            <p>Operational metrics such as users, orders, sessions, or transactions.</p>
+          </div>
+          <div class="card">
+            <h4>scenarios.csv</h4>
+            <p>Scenario assumptions used to simulate demand growth and future cost behavior.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="outputs">
+      <div class="container">
+        <h2 class="section-title">Outputs</h2>
+        <p class="section-copy">
+          The output of the engine is designed to support both technical review and leadership-level discussion.
+        </p>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Cost Outputs</h3>
+            <ul class="list">
+              <li>Modeled total cost</li>
+              <li>Cost by infrastructure driver</li>
+              <li>Rate-based calculation results</li>
+              <li>Scenario-adjusted cost projections</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Business Outputs</h3>
+            <ul class="list">
+              <li>Cost per transaction</li>
+              <li>Cost per order</li>
+              <li>Cost per user or workload</li>
+              <li>Scenario comparison for decision-making</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="use-cases">
+      <div class="container">
+        <h2 class="section-title">Use Cases</h2>
+        <p class="section-copy">
+          This modeling engine can support a range of FinOps, architecture, and business planning conversations.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>FinOps Forecasting</h3>
+            <p>
+              Project cost behavior based on expected growth in demand, users, or technical workload.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Architecture Trade-offs</h3>
+            <p>
+              Compare cost implications of design choices before they scale into larger financial impact.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Unit Economics</h3>
+            <p>
+              Translate technical consumption into business-aligned cost-to-serve metrics.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Showback Conversations</h3>
+            <p>
+              Support accountability discussions by linking usage patterns to modeled cost responsibility.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Scenario Planning</h3>
+            <p>
+              Explore how growth assumptions or workload changes affect future cost behavior.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Leadership Communication</h3>
+            <p>
+              Present infrastructure economics in a way that business and finance stakeholders can understand.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="container">
+        <h2 class="section-title">Architecture Flow</h2>
+        <p class="section-copy">
+          The model translates infrastructure consumption into cost insight through a structured flow.
+        </p>
+
+        <div class="diagram">
+          <div class="flow-row">
+            <div class="flow-box">
+              <strong>Usage Drivers</strong>
+              <small>Compute hours<br />Database hours<br />Storage GB<br />Requests / workload volume</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-box">
+              <strong>Pricing Layer</strong>
+              <small>Unit prices<br />Rate assumptions<br />Service cost mapping</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-box">
+              <strong>Cost Calculation</strong>
+              <small>Modeled total cost<br />Cost by driver<br />Cost distribution logic</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-box">
+              <strong>Business Translation</strong>
+              <small>Cost per order<br />Cost per user<br />Cost per transaction</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-box">
+              <strong>Scenario Simulation</strong>
+              <small>Growth cases<br />Demand sensitivity<br />Future cost outlook</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 22px;">
+          <div class="card">
+            <h3>Connect engineering to finance</h3>
+            <p>Make technical usage patterns legible in financial terms.</p>
+          </div>
+          <div class="card">
+            <h3>Make unit economics visible</h3>
+            <p>Show how infrastructure cost relates to actual business output.</p>
+          </div>
+          <div class="card">
+            <h3>Support better decisions</h3>
+            <p>Use modeled scenarios to guide planning, accountability, and architectural choices.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <h2>Explore cost-to-serve modeling, internal pricing, and scenario-based cloud economics.</h2>
+          <p>
+            This project is designed to show how infrastructure consumption can be converted into
+            business-aligned financial insight. If you want to discuss cloud unit economics, allocation,
+            forecasting, or cost visibility and accountability, let’s connect.
+          </p>
+
+          <div class="button-row">
+            <a href="https://calendly.com/finopswithdrchristine/30min" target="_blank" class="btn btn-primary">Book Session</a>
+            <a href="https://github.com/" target="_blank" class="btn btn-secondary">View Repository</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Driver-Based FinOps Modeling Engine • Built to demonstrate infrastructure-to-economics translation through structured FinOps modeling.
+    </div>
+  </footer>
+</body>
+</html>
