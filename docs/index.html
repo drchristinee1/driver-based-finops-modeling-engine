@@ -807,7 +807,7 @@
     const jsonPreviewEl = document.getElementById("json-preview");
 
     try {
-      const response = await fetch("./data/unit_economics_report.json?t=" + new Date().getTime());
+      const response = await fetch("/driver-based-finops-modeling-engine/data/unit_economics_report.json?t=" + new Date().getTime());
 
       if (!response.ok) {
         throw new Error("Could not load model output JSON.");
