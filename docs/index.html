@@ -800,7 +800,11 @@
       Driver-Based FinOps Modeling Engine • Built to demonstrate infrastructure-to-economics translation through structured FinOps modeling.
     </div>
   </footer>
-  <script>
+
+    <script src="model-output.js"></script>
+
+     <script>
+  
   async function loadModelOutput() {
     const scenarioCountEl = document.getElementById("scenario-count");
     const scenarioNamesEl = document.getElementById("scenario-names");
@@ -808,13 +812,11 @@
     const jsonPreviewEl = document.getElementById("json-preview");
 
     try {
-    const response = await fetch("https://drchristine1.github.io/driver-based-finops-modeling-engine/data/unit_economics_report.json?t=" + new Date().getTime());
+    const data = window.MODEL_OUTPUT;
 
-      if (!response.ok) {
-        throw new Error("Could not load model output JSON.");
-      }
-
-      const data = await response.json();
+    if (!data) {
+    throw new Error("Model output not found.");
+    }
 
       const scenarios = data.scenario_analysis || [];
       const scenarioNames = scenarios.map(s => s.scenario_name || "Unnamed Scenario");
