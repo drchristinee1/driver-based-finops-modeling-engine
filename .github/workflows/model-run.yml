@@ -35,6 +35,15 @@ jobs:
       - name: Copy output into docs
         run: cp output/unit_economics_report.json docs/data/unit_economics_report.json
 
+      - name: Create model-output.js for the site
+        run: |
+          echo "window.MODEL_OUTPUT = " > docs/model-output.js
+          cat output/unit_economics_report.json >> docs/model-output.js
+          echo ";" >> docs/model-output.js
+
+      - name: Disable Jekyll
+        run: touch docs/.nojekyll
+
       - name: Disable Jekyll
         run: touch docs/.nojekyll
 
